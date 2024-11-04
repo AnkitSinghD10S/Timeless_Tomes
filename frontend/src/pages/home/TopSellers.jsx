@@ -35,7 +35,7 @@ const TopSeller = () => {
       : books.filter(
           (book) => book.category === selectedCategory.toLowerCase()
         );
-  console.log(fliteredBooks);
+  // console.log(fliteredBooks);
 
   return (
     <div className="py-10">
