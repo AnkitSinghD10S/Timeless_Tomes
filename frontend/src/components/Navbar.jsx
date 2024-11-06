@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -5,6 +6,7 @@ import { HiBars3CenterLeft, HiOutlineUserCircle } from "react-icons/hi2";
 import { IoIosSearch, IoIosHeartEmpty } from "react-icons/io";
 import { PiShoppingCartSimple } from "react-icons/pi";
 import avatarImg from "../assets/avatar.png";
+import { useSelector } from "react-redux";
 
 const navigatin = [
   {
@@ -28,7 +30,7 @@ const navigatin = [
 const Navbar = () => {
   const [isDropdownOpen, setIsDropDown] = useState(false);
   // console.log(isDropdownOpen);
-
+  const cartItems = useSelector((state) => state.cart.cartItems);
   const currentUser = true;
 
   return (
@@ -98,7 +100,9 @@ const Navbar = () => {
             className="bg-primary p-1 sm:px-6 px-2 flex items-center rounded-md"
           >
             <PiShoppingCartSimple className="" />
-            <span className="text-sm font-semibold sm:ml-1">0</span>
+            <span className="text-sm font-semibold sm:ml-1">
+              {cartItems.length}
+            </span>
           </Link>
         </div>
       </nav>
