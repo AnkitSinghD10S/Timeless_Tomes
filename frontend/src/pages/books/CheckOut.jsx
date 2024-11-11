@@ -1,9 +1,15 @@
 // import React from "react";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 const CheckOut = () => {
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
+  let totalPrice=0;
+  for(let i of cartItems){
+    totalPrice+=i.newPrice;
+  }
     
   const handleSubmit = () => {};
   const onSubmit = "";
@@ -18,8 +24,8 @@ const CheckOut = () => {
               <h2 className="font-semibold text-xl text-gray-600 mb-2">
                 Cash On Delevary
               </h2>
-              <p className="text-gray-500 mb-2">Total Price: $0</p>
-              <p className="text-gray-500 mb-6">Items:0</p>
+              <p className="text-gray-500 mb-2">Total Price: {totalPrice}</p>
+              <p className="text-gray-500 mb-6">Items:{cartItems.length}</p>
             </div>
 
             <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
