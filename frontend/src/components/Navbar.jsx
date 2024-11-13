@@ -2,11 +2,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { HiBars3CenterLeft, HiOutlineUserCircle } from "react-icons/hi2";
 import { IoIosSearch, IoIosHeartEmpty } from "react-icons/io";
 import { PiShoppingCartSimple } from "react-icons/pi";
 import avatarImg from "../assets/avatar.png";
 import { useSelector } from "react-redux";
+import logo from '../../public/logo1_svg.svg'
 
 const navigatin = [
   {
@@ -39,7 +39,7 @@ const Navbar = () => {
         {/* left side */}
         <div className="flex items-center md:gap-16 gap-4">
           <Link to="/">
-            <HiBars3CenterLeft className="size-6" />
+          <img src={logo} alt="" className="h-20" />
           </Link>
           {/* search input */}
           <div className="relative sm:w-72 w-40 space-x-2">
