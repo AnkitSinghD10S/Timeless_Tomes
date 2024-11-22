@@ -2,6 +2,8 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 // import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const CheckOut = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -10,11 +12,10 @@ const CheckOut = () => {
   for(let i of cartItems){
     totalPrice+=i.newPrice;
   }
-    
-  const handleSubmit = () => {};
-  const onSubmit = "";
-  const currentUser = "ankit";
-  const isChecked = false;
+  let currentUser="ankit";
+  const [isChecked,setIsChecked] = useState(false)
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = (data) => {console.log(data)};
   return (
     <section>
       <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">

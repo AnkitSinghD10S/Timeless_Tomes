@@ -16,7 +16,6 @@ const Banner = () => {
           to captivating memoirs, this week&apos;s new releases offer something
           for everyone
         </p>
-        <button className="btn-primary">Subscribe</button>
       </div>
     </div>
   );
