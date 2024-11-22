@@ -6,7 +6,7 @@ import { IoIosSearch, IoIosHeartEmpty } from "react-icons/io";
 import { PiShoppingCartSimple } from "react-icons/pi";
 import avatarImg from "../assets/avatar.png";
 import { useSelector } from "react-redux";
-import logo from '../../public/logo1_svg.svg'
+import logo from '../assets/logo1_svg.svg'
 
 const navigatin = [
   {

@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 // import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
 
 const CheckOut = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -10,11 +11,10 @@ const CheckOut = () => {
   for(let i of cartItems){
     totalPrice+=i.newPrice;
   }
-    
-  const handleSubmit = () => {};
-  const onSubmit = "";
-  const currentUser = "ankit";
-  const isChecked = false;
+  let currentUser="ankit";
+  let isChecked="true"
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = data => console.log(data);
   return (
     <section>
       <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
@@ -219,6 +219,7 @@ const CheckOut = () => {
                         <button
                           disabled={!isChecked}
                           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                          onClick={}
                         >
                           Place an Order
                         </button>
