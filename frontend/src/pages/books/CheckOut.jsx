@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 // import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
 
 const CheckOut = () => {
@@ -12,6 +13,10 @@ const CheckOut = () => {
   for(let i of cartItems){
     totalPrice+=i.newPrice;
   }
+  let currentUser="ankit";
+  let isChecked="true"
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = data => console.log(data);
   let currentUser="ankit";
   const [isChecked,setIsChecked] = useState(false)
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -220,6 +225,7 @@ const CheckOut = () => {
                         <button
                           disabled={!isChecked}
                           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                          onClick={}
                         >
                           Place an Order
                         </button>
