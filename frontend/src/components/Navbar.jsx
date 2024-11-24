@@ -7,12 +7,10 @@ import { PiShoppingCartSimple } from "react-icons/pi";
 import avatarImg from "../assets/avatar.png";
 import { useSelector } from "react-redux";
 import logo from '../assets/logo1_svg.svg'
+import { HiOutlineUser } from "react-icons/hi";
+import { useAuth } from "../context/AuthContext";
 
 const navigatin = [
-  {
-    name: "DashBoard",
-    href: "/dashboard",
-  },
   {
     name: "Orders",
     href: "/Orders",
@@ -31,8 +29,11 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropDown] = useState(false);
   // console.log(isDropdownOpen);
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const currentUser = true;
+  const {currentUser,logout } = useAuth()
 
+  const handleLogOut =()=>{
+    logout()
+  }
   return (
     <header className="max-w-screen-2xl mx-auto px-4 py-6 border-slate-700">
       <nav className="flex justify-between items-center">
@@ -82,13 +83,16 @@ const Navbar = () => {
                           </Link>
                         </li>
                       ))}
+                      <li>
+                        <button className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-500" onClick={handleLogOut()}>Logout</button>
+                      </li>
                     </ul>
                   </div>
                 )}
               </>
             ) : (
               <Link to="/login">
-                <HiOutlineUserCircle className="size-6" />
+                 <HiOutlineUser className="size-4" />
               </Link>
             )}
           </div>
