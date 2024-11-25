@@ -8,7 +8,7 @@ const cors = require("cors");
 app.use(express.json());
 
 app.use(cors({
-    origin:['http://localhost:5173'],
+    origin:['http://localhost:5174'],
     credentials:true
 }))
 
@@ -23,7 +23,7 @@ app.use("/api/orders",orderRoutes)
 async function main() {
     await mongoose.connect(process.env.DB_URL);
     app.get("/", (req, res) => {
-        res.send("Hello World!");
+        res.send("running");
     });
 }
 main()

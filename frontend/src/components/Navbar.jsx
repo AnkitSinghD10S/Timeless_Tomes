@@ -1,117 +1,109 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { IoIosSearch, IoIosHeartEmpty } from "react-icons/io";
-import { PiShoppingCartSimple } from "react-icons/pi";
-import avatarImg from "../assets/avatar.png";
-import { useSelector } from "react-redux";
 import logo from '../assets/logo1_svg.svg'
+import { Link } from "react-router-dom";
+import { HiOutlineHeart, HiOutlineShoppingCart } from "react-icons/hi2";
+import { IoSearchOutline } from "react-icons/io5";
 import { HiOutlineUser } from "react-icons/hi";
+
+import avatarImg from "../assets/avatar.png"
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useAuth } from "../context/AuthContext";
 
-const navigatin = [
-  {
-    name: "Orders",
-    href: "/Orders",
-  },
-  {
-    name: "Cart",
-    href: "/Cart",
-  },
-  {
-    name: "Check out",
-    href: "/checkout",
-  },
-];
+const navigation = [
+    {name: "Orders", href:"/orders"},
+    {name: "Cart Page", href:"/cart"},
+    {name: "Check Out", href:"/checkout"},
+]
 
 const Navbar = () => {
-  const [isDropdownOpen, setIsDropDown] = useState(false);
-  // console.log(isDropdownOpen);
-  const cartItems = useSelector((state) => state.cart.cartItems);
-  const {currentUser,logout } = useAuth()
 
-  const handleLogOut =()=>{
-    logout()
-  }
-  return (
-    <header className="max-w-screen-2xl mx-auto px-4 py-6 border-slate-700">
-      <nav className="flex justify-between items-center">
-        {/* left side */}
-        <div className="flex items-center md:gap-16 gap-4">
-          <Link to="/">
-          <img src={logo} alt="" className="h-20" />
-          </Link>
-          {/* search input */}
-          <div className="relative sm:w-72 w-40 space-x-2">
-            <IoIosSearch className="absolute inline-block left-3 inset-y-2" />
-            <input
-              type="text"
-              placeholder="Search here"
-              className="bg-[#EAEAEA] w-full py-1 md:px-8 px-6 rounded-md focus:outline-none"
-            />
-          </div>
-        </div>
-        {/* rightside */}
-        <div className="relative flex items-center md:space-x-3 space-x-2">
-          <div>
-            {currentUser ? (
-              <>
-                <button onClick={() => setIsDropDown(!isDropdownOpen)}>
-                  <img
-                    src={avatarImg}
-                    alt=""
-                    className={` size-7 rounded-full ${
-                      currentUser ? "ring-2 ring-blue-500" : ""
-                    }`}
-                  />
-                </button>
-                {/* Dropdown */}
-                {isDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md z-40">
-                    <ul className="py-2">
-                      {navigatin.map((item) => (
-                        <li
-                          key={item.name}
-                          onClick={() => setIsDropDown(!isDropdownOpen)}
-                        >
-                          <Link
-                            to={item.href}
-                            className="block px-4 py-2 text-sm hover:bg-gray-500"
-                          >
-                            {item.name}
-                          </Link>
-                        </li>
-                      ))}
-                      <li>
-                        <button className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-500" onClick={handleLogOut()}>Logout</button>
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </>
-            ) : (
-              <Link to="/login">
-                 <HiOutlineUser className="size-4" />
-              </Link>
-            )}
-          </div>
-          <button className="hidden sm:block">
-            <IoIosHeartEmpty className="size-6" />
-          </button>
-          <Link
-            to="/cart"
-            className="bg-primary p-1 sm:px-6 px-2 flex items-center rounded-md"
-          >
-            <PiShoppingCartSimple className="" />
-            <span className="text-sm font-semibold sm:ml-1">
-              {cartItems.length}
-            </span>
-          </Link>
-        </div>
-      </nav>
-    </header>
-  );
-};
+    const  [isDropdownOpen, setIsDropdownOpen] = useState(false)
+    const cartItems = useSelector(state => state.cart.cartItems);
+   
+    const {currentUser, logout} = useAuth()
+    
+    const handleLogOut = () => {
+        logout()
+    }
+
+    const token = localStorage.getItem('token');
+  
+    return (
+        <header className="max-w-screen-2xl mx-auto px-4 py-6">
+            <nav className="flex justify-between items-center">
+                {/* left side */}
+                <div className="flex items-center md:gap-16 gap-4">
+                    <Link to="/">
+                        <img src={logo} alt="" className='h-16' />
+                    </Link>
+
+                    {/* search input */}
+                    <div className="relative sm:w-72 w-40 space-x-2">
+
+                        <IoSearchOutline className="absolute inline-block left-3 inset-y-2" />
+
+                        <input type="text" placeholder="Search here"
+                            className="bg-[#EAEAEA] w-full py-1 md:px-8 px-6 rounded-md focus:outline-none"
+                        />
+                    </div>
+                </div>
+
+
+                {/* rigth side */}
+                <div className="relative flex items-center md:space-x-3 space-x-2">
+                    <div >
+                        {
+                            currentUser ? <>
+                            <button onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                                <img src={avatarImg} alt="" className={`size-7 rounded-full ${currentUser ? 'ring-2 ring-blue-500' : ''}`} />
+                            </button>
+                            {/* show dropdowns */}
+                            {
+                                isDropdownOpen && (
+                                    <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md z-40">
+                                        <ul className="py-2">
+                                            {
+                                                navigation.map((item) => (
+                                                    <li key={item.name} onClick={() => setIsDropdownOpen(false)}>
+                                                        <Link to={item.href} className="block px-4 py-2 text-sm hover:bg-gray-100">
+                                                            {item.name}
+                                                        </Link>
+                                                    </li>
+                                                ))
+                                            }
+                                            <li>
+                                                <button
+                                                onClick={handleLogOut}
+                                                className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100">Logout</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                )
+                            }
+                            </> : token ?  <Link to="/dashboard" className='border-b-2 border-primary'>Dashboard</Link> : (
+                                <Link to="/login"> <HiOutlineUser className="size-6" /></Link>
+                            )
+                        }
+                    </div>
+                    
+                    <button className="hidden sm:block">
+                        <HiOutlineHeart className="size-6" />
+                    </button>
+
+                    <Link to="/cart" className="bg-primary p-1 sm:px-6 px-2 flex items-center rounded-sm">
+                        <HiOutlineShoppingCart className='' />
+                        {
+                            cartItems.length > 0 ?  <span className="text-sm font-semibold sm:ml-1">{cartItems.length}</span> :  <span className="text-sm font-semibold sm:ml-1">0</span>
+                        }
+                        
+                       
+                    </Link>
+                </div>
+            </nav>
+        </header>
+    )
+}
 
 export default Navbar;
